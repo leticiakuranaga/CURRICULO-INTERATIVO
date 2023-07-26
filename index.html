@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Adicione a biblioteca Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Leticia Kuranaga</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: url('planodefundo.jpg');
+    }
+
+    .quadrado {
+      position: relative;
+      width: 700px;
+      height: 600px;
+      background-color: rgba(255, 255, 255, 0.3);
+      z-index: 1;
+      border-radius: 5px;
+    }
+
+    .barras-lista {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: absolute;
+      bottom: 5px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .barra {
+      width: 570px;
+      height: 40px; /* Altura das barras */
+      background-color: rgba(255, 255, 255, 0.3);
+      margin-bottom: 25px; /* Espaçamento entre as barras */
+      cursor: pointer;
+      border-radius: 5px;
+      color: #2d0b55;
+      display: flex; /* Adiciona display flex para alinhar verticalmente o conteúdo */
+      justify-content: center; /* Centraliza o conteúdo verticalmente */
+      align-items: center; 
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* Estilização das barras ao passar o mouse */
+    .barra:hover {
+      background-color: rgb(125, 56, 139); /* Cor da barra ao passar o mouse */
+    }
+
+    .titulo-barra {
+      position: absolute;
+      bottom: -20px; /* Posicionamento do título abaixo da barra */
+      left: 50%;
+      transform: translateX(-50%); /* Centraliza horizontalmente */
+      font-size: 14px;
+      color: #72197a; /* Cor do título */
+      font-family: Arial, sans-serif; /* Fonte do título */
+      opacity: 0; /* Título oculto por padrão */
+      transition: opacity 0.3s; /* Transição suave para exibir o título */
+    }
+
+    /* Estilo para a foto redonda */
+    .profile-picture {
+      position: absolute;
+      top: 80px;
+      left:80px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 3px solid white;
+      background-image: url(fotoperfil.jpg); /* Substitua "profile.jpg" pelo nome da sua imagem */
+      background-size: cover;
+      background-position: center;
+      z-index: 2;
+    }
+
+    .introduction {
+      position: absolute;
+      top: 30px;
+      left: 62%;
+      transform: translateX(-50%);
+      color: #fff; /* Apenas para garantir que o texto seja visível */
+      font-size: 35px; /* Ajuste o tamanho da fonte conforme necessário */
+    }
+
+   /* Estilos para a lista de informações */
+   .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column; /* Organizar os elementos em coluna */
+      align-items: flex-start; /* Alinhar os elementos à esquerda */
+      gap: 8px; /* Alterar os pixels entre cada item da lista */
+      position: absolute;
+      top: 180px; /* Posiciona a lista mais para cima */
+      left: 300px; /* Posiciona a lista ao lado da foto */
+    }
+
+    .info-list li {
+      display: flex;
+      align-items: center;
+    }
+
+    .info-list li i {
+      font-size: 15px;
+      margin-right: 50px;
+    }
+
+    .info-list li span {
+      font-size: 20px;
+      color: #ffffff;
+      font-family: "Calibri", sans-serif;
+    }
+
+    .info-list li i {
+      font-size: 20px;
+      margin-right: 5px; /* Espaçamento entre o ícone e o texto */
+      color: rgb(131, 91, 158); /* Defina a cor desejada aqui */
+    }
+
+    .barra:hover .titulo-barra {
+      opacity: 1; /* Exibe o título ao passar o mouse na barra */
+    }
+
+    .caixa-texto {
+      display: none;
+      position: absolute;
+      top: 50%; /* Posição vertical da caixa */
+      left: 50%; /* Posição horizontal da caixa */
+      transform: translate(-50%, -50%); /* Centraliza verticalmente e horizontalmente */
+      width: 700px; /* Largura da caixa de texto */
+      height: 500px; /* Espaçamento interno da caixa de texto */
+      background-color: #000000; /* Cor de fundo da caixa de texto */
+      border: 1px solid #ccc;
+      z-index: 1; /* Coloca a caixa de texto acima do quadrado */
+      color: #ffffff; /* Cor do texto dentro da caixa */
+      font-size: 18px; /* Tamanho do texto dentro da caixa */
+      border-radius: 5px;
+      text-align: left; 
+      word-wrap: break-word;
+      padding: 30px;
+      line-height: 1.6;
+      overflow: auto;
+    }
+
+    /* Estilização para a camada de fundo escura */
+    .fundo-escuro {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Cor escura semi-transparente */
+      z-index: 1; /* Coloca a camada acima do conteúdo */
+    }
+
+    /* Estilização para manter a caixa de texto acima da camada de fundo escura */
+    .caixa-texto.aberta {
+      z-index: 3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="quadrado">
+    <div class="introduction">
+      <p>Olá, sou Leticia Kuranaga!</p>
+    </div>
+    <div>
+
+    <!-- Adicione a lista de informações em formato vertical -->
+    <ul class="info-list">
+      <!-- Ícone de cargo -->
+      <li>
+        <i class="fas fa-briefcase"></i>
+        <span>Líder de Suporte Técnico</span>
+      </li>
+      <!-- Ícone de endereço -->
+      <li>
+        <i class="fas fa-map-marker-alt"></i>
+        <span>Lorena-SP</span>
+      </li>
+      <!-- Ícone de telefone -->
+      <li>
+        <i class="fas fa-phone"></i>
+        <span>(12)98296-2250</span>
+      </li>
+      <!-- Ícone de e-mail -->
+      <li>
+        <i class="fas fa-envelope"></i>
+        <span>toshie.kuranaga@gmail.com</span>
+      </li>
+    </ul>
+
+    <!-- Foto redonda -->
+    <div class="profile-picture"></div>
+
+    <div class="quadrado">
+      <ul class="barras-lista">
+        <li class="barra" data-title="Barra 1" onclick="mostrarCaixaTexto(1)">
+          Sobre mim &#x1F60A;
+          <div class="titulo-barra">CLIQUE PARA VER MAIS :D </div> <!-- Aqui movemos a classe .titulo-barra para esta div -->
+        </li>
+        <li class="barra" data-title="Barra 2" onclick="mostrarCaixaTexto(2)">
+          Minhas formações e conhecimentos &#x1F4DA;
+          <div class="titulo-barra">CLIQUE PARA VER MAIS :D</div> <!-- Movemos a classe .titulo-barra para esta div -->
+        </li>
+        <li class="barra" data-title="Barra 3" onclick="mostrarCaixaTexto(3)">
+          Minhas experiências profissionais &#x1F9F0;
+          <div class="titulo-barra">CLIQUE PARA VER MAIS :D</div> <!-- Movemos a classe .titulo-barra para esta div -->
+        </li>
+        <li class="barra" data-title="Barra 4" onclick="mostrarCaixaTexto(4)">
+          Sobre esste projeto  &#x1F469;&#x200D;&#x1F4BB;
+          <div class="titulo-barra">CLIQUE PARA VER MAIS :D</div> <!-- Movemos a classe .titulo-barra para esta div -->
+        </li>
+      </ul>
+    </div>
+    <div>
+  <div>
+
+  <div class="caixa-texto" id="caixaTexto1">
+    <p>
+      👋 Olá! Sou estudante de Engenharia da Computação apaixonada por tecnologia e inovação. Com uma trajetória que combina experiências em engenharia e suporte técnico, venho construindo uma carreira versátil e repleta de aprendizados.
+    </p>
+    <p>
+      Minha jornada profissional começou com um estágio em engenharia, onde tive a oportunidade de mergulhar no desenvolvimento de soluções tecnológicas e aprender a lidar com desafios complexos. Durante esse período, pude aprimorar minhas habilidades em programação, especialmente no contexto de banco de dados SQL e Firebird, os quais tive a oportunidade de explorar em profundidade.
+    </p>
+    <p>
+      Posteriormente, abracei uma nova experiência como estagiária em suporte técnico, onde fortaleci minhas habilidades de comunicação e resolução de problemas. Acompanhar e auxiliar os usuários no uso das tecnologias trouxe uma perspectiva única sobre a importância do suporte de qualidade e a capacidade de gerar impacto positivo nos usuários finais.
+    </p>
+    <p>
+      Atualmente, sou uma profissional efetivada no campo de suporte técnico, atuando com dedicação e comprometimento em fornecer soluções ágeis e eficientes para os desafios enfrentados pelos nossos clientes. Busco constantemente ampliar meu conhecimento e estar atualizada com as últimas tendências tecnológicas. Sou movida pela curiosidade e pela vontade de crescer tanto pessoal quanto profissionalmente. 🚀💡💻📚😃
+    </p>
+  </div>
+</div>
+  <div class="caixa-texto" id="caixaTexto2">
+    <p>
+      🎓 Formações e Conhecimentos:
+    </p>
+    <p>
+      🎓 Formações e Conhecimentos:
+      Sou estudante de Engenharia da Computação pela Univesp, com um percurso de 5 anos de dedicação acadêmica, adquirindo conhecimentos em diversas áreas que me permitem enfrentar desafios de forma eficaz e inovadora.
+    </p>
+    <p>
+      💻 CSS e HTML: Adquiri conhecimentos em CSS e HTML por meio de cursos na plataforma Udemy, o que me permite criar interfaces atraentes e responsivas para sites e aplicações web.
+    </p>
+    <p>
+      🔧 VBA: Tenho conhecimentos em VBA (Visual Basic for Applications), permitindo-me desenvolver soluções personalizadas para automação de tarefas e melhorias de produtividade em ambientes corporativos. Busquei me aprimorar além da formação acadêmica.
+    </p>
+    <p>
+      🗃️ SQL: Além do aprendizado na Univesp, fiz um curso específico em programação SQL também na Univesp, o que me permite trabalhar com bancos de dados de forma eficiente, realizar consultas complexas e garantir a integridade dos dados.
+    </p>
+    <p>
+      🔥 Firebird: Adquiri competência em Firebird na MBD, onde pude implementar e gerenciar sistemas de banco de dados baseados nessa tecnologia.
+    </p>
+    <p>
+      📊 Excel Avançado: Sou habilidoso(a) em Excel, utilizando recursos avançados para análise de dados, criação de relatórios dinâmicos e automação de planilhas.
+    </p>
+    <p>
+      🌐 Inglês e Japonês Básico: Meu conhecimento em Inglês e Japonês foi adquirido por meio de aulas particulares com uma professora especializada, permitindo-me uma comunicação em nível introdutório em ambientes e situações cotidianas.
+    </p>
+    <p>
+      Com essa combinação de formações acadêmicas, cursos adicionais e conhecimentos autodidatas, estou preparado(a) para enfrentar projetos desafiadores e contribuir significativamente em qualquer equipe ou empresa que eu faça parte.
+    </p>
+  </div>
+  </div>
+  <div class="caixa-texto" id="caixaTexto3">
+    <p>
+    --Suporte Técnico na MBD  |
+    Período: Desde Dez/2020 - Atualmente |
+    Local: Lorena-SP, Brasil--
+  </p>
+  <p>
+    Iniciei minha jornada na MBD como estagiária em Suporte Técnico e, devido ao desempenho e dedicação, fui efetivada após 4 meses. Nessa função, oriento uma equipe dedicada, assegurando que o suporte técnico seja prestado com excelência. Além disso, continuo envolvida na configuração de softwares e hardwares, garantindo o correto funcionamento dos sistemas.
+  </p>
+  <p>
+    --Desenvolvedora na MR Sorvetes |
+    Período: Ago/2020 - Set/2021 |
+    Local: Lorena-SP, Brasil--
+  </p>
+  <p>
+    Na MR Sorvetes, participei de um emocionante projeto de desenvolvimento de controle de manutenção e PCP. Durante esse período, adquiri experiência valiosa em criar soluções personalizadas e eficientes para a empresa, utilizando linguagens como VBA e trabalhando diretamente com bancos de dados.
+  </p>
+  <p>
+    Recrutadores: Iniciei na MBD como estagiária em Suporte Técnico e, após 4 meses, fui promovida devido ao meu desempenho excepcional. Também atuei como desenvolvedora em um projeto de controle de manutenção e PCP na MR Sorvetes. Minhas habilidades em liderança, VBA e bancos de dados me tornam uma profissional preparada para novos desafios!
+  </p>
+</div></div>
+  <div class="caixa-texto" id="caixaTexto4">
+    <p>
+      Adorei compartilhar com vocês o meu primeiro projeto usando HTML, CSS e JS! 😄✨ A fascinante inspiração de criar um currículo online e interativo nasceu do desejo de trilhar os caminhos da tecnologia, ousando sair dos padrões e apresentar minha jornada de forma cativante e inovadora. 🌟💻✨
+    </p>
+    <p>
+      Vamos começar com o HTML, uma estrutura essencial que serviu de alicerce! 💪 Eu o utilizei para dar vida à estrutura do meu projeto.
+    </p>
+    <p>
+      Agora, não podemos esquecer o CSS, ele deu cor e brilho a tudo, tornando cada canto do projeto um espetáculo!💥
+      A propriedade que deu vida a tudo foi a nossa mais querida propriedade do CSS: background-color 🌈 com efeito rgba, um toque de suavidade.
+    </p>
+    <p>
+      Aí vem o JS, o verdadeiro mágico da interatividade! 🔮💫 Esse prodígio da programação trouxe vida ao projeto! Os botões ganharam uma habilidade única de mudar de cor quando você passa o mouse sobre eles.
+    </p>
+    <code>
+      .barra:hover {
+        background-color: rgb(125, 56, 139); /* Cor da barra ao passar o mouse */
+      }
+    </code>
+    <p>
+      Aqui está o trecho de JavaScript que torna tudo possível:
+      <code>
+        <p></p>
+        function mostrarCaixaTexto(numeroCaixa) {
+          const caixaTexto = document.getElementById(`caixaTexto${numeroCaixa}`);
+          caixaTexto.style.display = "block";
+          document.querySelector('.fundo-escuro').style.display = "block";
+          caixaTexto.classList.add('aberta');
+        </p>
+        }
+      </code>
+    </p>
+    <p>
+      Se quiserem conferir o projeto completo, clique <a href="#">aqui</a>.
+    </p>
+    <p>
+      Agradeço a todos por acompanharem essa jornada! 😍
+    </p>
+    <p>
+      Agora é só levantar a cortina e começar a codar! Até a próxima! 👋
+    </p>
+  </div>
+
+  <!-- Camada de fundo escura -->
+  <div class="fundo-escuro" onclick="fecharCaixaTexto()"></div>
+
+  <script>
+    function mostrarCaixaTexto(numeroCaixa) {
+      const caixaTexto = document.getElementById(`caixaTexto${numeroCaixa}`);
+      caixaTexto.style.display = "block";
+      document.querySelector('.fundo-escuro').style.display = "block";
+      caixaTexto.classList.add('aberta');
+    }
+
+    function fecharCaixaTexto() {
+      const caixasTexto = document.querySelectorAll('.caixa-texto');
+      const fundoEscuro = document.querySelector('.fundo-escuro');
+      caixasTexto.forEach(caixaTexto => {
+        caixaTexto.style.display = "none";
+        caixaTexto.classList.remove('aberta');
+      });
+      fundoEscuro.style.display = "none";
+    }
+
+    function trocarCor(elemento, cor) {
+      elemento.style.backgroundColor = cor;
+    }
+
+  </script>
+</body>
+</html>
