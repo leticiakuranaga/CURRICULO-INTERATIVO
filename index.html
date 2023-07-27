@@ -167,6 +167,62 @@
     .caixa-texto.aberta {
       z-index: 3;
     }
+
+    @media (max-width: 600px) {
+      .quadrado {
+    position: relative;
+    width: 350px;
+    height: 650px;
+    background-color: rgba(255, 255, 255, 0.3);
+    z-index: 1;
+    border-radius: 20px;
+}
+
+.barras-lista {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    bottom: 60px;
+    left: 170px;
+    transform: translateX(-50%);
+
+.profile-picture {
+    position: absolute;
+    top: 55px;
+    left: 30px;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 3px solid white;
+    background-image: url(fotoperfil.jpg);
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+}
+
+.introduction {
+    position: absolute;
+    top: 30px;
+    left: 260px;
+    transform: translateX(-50%);
+    color: #fff;
+    font-size: 30px;
+
+.info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    position: absolute;
+    top: 210px;
+    left: 60px;
+}
+    }
+    
   </style>
 </head>
 <body>
