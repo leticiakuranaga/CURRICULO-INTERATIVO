@@ -168,7 +168,45 @@
       z-index: 3;
     }
 
+    .whatsapp-button {
+  position: fixed;
+  bottom: 30px;
+  right: 20px;
+  width: 70px;
+  height: 70px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-button img {
+  width: 80px;
+  height: 80px;
+}
+
     @media (max-width: 400px) {
+
+      .whatsapp-button {
+  position: fixed;
+  bottom: 630px;
+  right: 20px;
+  width: 50px;
+  height: 55px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.whatsapp-button img {
+  width: 80px;
+  height: 80px;
+}
 
       .caixa-texto {
       display: none;
@@ -206,8 +244,8 @@
     }
       .quadrado {
     position: relative;
-    width: 300px;
-    height: 700px;
+    width: 320px;
+    height: 750px;
     background-color: rgba(255, 255, 255, 0.2);
     z-index: 1;
     border-radius: 20px;
@@ -266,6 +304,10 @@
   </style>
 </head>
 <body>
+
+  <a href="https://api.whatsapp.com/send?phone=5512982962250" class="whatsapp-button" target="_blank">
+    <img src="https://github.com/leticiakuranaga/Project1/blob/main/zap.png?raw=true" alt="WhatsApp">
+  </a>
 
   <div class="quadrado">
     <div class="introduction">
